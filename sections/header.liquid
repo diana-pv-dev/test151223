@@ -1,0 +1,49 @@
+{{ 'section-header.css' | asset_url | stylesheet_tag }}
+
+<div class="s-header">
+  <div class="s-header__logo">
+    <a class="s-header__logo-link" href="/">
+      {% if section.settings.logo %}
+        {% render 'image',
+          image: section.settings.logo,
+          max_width: 122,
+          max_height: 15,
+          preload: true,
+          ratio_wrap: false
+        %}
+      {% endif %}
+    </a>
+  </div>
+
+  <div class="s-header__icons">
+    <a>
+      {% render 'icon-search' %}
+    </a>
+
+    <a href="{{ routes.cart_url }}">
+      {% render 'icon-cart' %}
+    </a>
+
+    <a> {% render 'icon-burger-menu' %}</a>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Header",
+  "tag": "header",
+  "class": "section-header",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Header settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Company logo",
+      "info": "Recommended size: x108"
+    }
+  ]
+}
+{% endschema %}

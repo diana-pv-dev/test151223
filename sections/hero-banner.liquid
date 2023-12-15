@@ -1,0 +1,26 @@
+{{ 'section-hero-banner.css' | asset_url | stylesheet_tag }}
+
+<div class="s-hero-banner">
+  <div class="s-hero-banner__image-container">
+    {% render 'image-lazy', image: section.settings.banner_image, class: 's-hero-banner__image' %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Hero banner",
+  "class": "section__hero-banner",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner image"
+    }
+  ]
+}
+{% endschema %}

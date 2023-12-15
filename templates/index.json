@@ -1,11 +1,11 @@
 {
   "sections": {
-    "main": {
-      "type": "test",
+    "hero-banner": {
+      "type": "hero-banner",
       "settings": {}
     }
   },
   "order": [
-    "main"
+    "hero-banner"
   ]
 }

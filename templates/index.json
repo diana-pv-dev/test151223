@@ -2,7 +2,9 @@
   "sections": {
     "hero-banner": {
       "type": "hero-banner",
-      "settings": {}
+      "settings": {
+        "banner_image": "shopify:\/\/shop_images\/home.png"
+      }
     }
   },
   "order": [

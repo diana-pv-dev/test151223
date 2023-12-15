@@ -1,7 +1,9 @@
 {{ 'section-header.css' | asset_url | stylesheet_tag }}
 
+{% comment %} зробити навігацію зет-індекс 98, лого 99 та бургер меню/хрест, та окрему навігацію яка буде заходити зверху зліва 100 {% endcomment %}
+
 <div class="s-header">
-  <div class="s-header__logo">
+  <div class="s-header__logo-container">
     <a class="s-header__logo-link" href="/">
       {% if section.settings.logo %}
         {% render 'image',
@@ -15,16 +17,36 @@
     </a>
   </div>
 
-  <div class="s-header__icons">
-    <a>
-      {% render 'icon-search' %}
-    </a>
+  <div class="s-header__wrapper">
+    <nav class="s-header__nav">
+      <ul class="s-header__nav-list">
+        {% for link in section.settings.menu.links -%}
+          <li class="s-header__nav-item">{{ link.title | link_to: link.url }}</li>
+        {%- endfor %}
+      </ul>
+    </nav>
 
-    <a href="{{ routes.cart_url }}">
-      {% render 'icon-cart' %}
-    </a>
+    <div class="s-header__icons">
+      <button class="s-header__icons-btn">
+        <div class="s-header__icon">
+          {% render 'icon-search' %}
+        </div>
+      </button>
 
-    <a> {% render 'icon-burger-menu' %}</a>
+      <button class="s-header__icons-btn">
+        <div class="s-header__icon">
+          <a href="{{ routes.cart_url }}">
+            {% render 'icon-cart' %}
+          </a>
+        </div>
+      </button>
+
+      <button class="s-header__icons-btn">
+        <div class="s-header__icon s-header__icon--burger">
+          {% render 'icon-burger-menu' %}
+        </div>
+      </button>
+    </div>
   </div>
 </div>
 
@@ -43,6 +65,11 @@
       "id": "logo",
       "label": "Company logo",
       "info": "Recommended size: x108"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu"
     }
   ]
 }

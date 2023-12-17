@@ -1,6 +1,6 @@
 {{ 'section-header.css' | asset_url | stylesheet_tag }}
 
-{% comment %} зробити навігацію зет-індекс 98, лого 99 та бургер меню/хрест, та окрему навігацію яка буде заходити зверху зліва 100 {% endcomment %}
+<script src="{{ 'menu-navigation.js' | asset_url }}" defer></script>
 
 <div class="s-header">
   <div class="s-header__logo-container">
@@ -17,37 +17,69 @@
     </a>
   </div>
 
-  <div class="s-header__wrapper">
-    <nav class="s-header__nav">
-      <ul class="s-header__nav-list">
-        {% for link in section.settings.menu.links -%}
-          <li class="s-header__nav-item">{{ link.title | link_to: link.url }}</li>
-        {%- endfor %}
-      </ul>
-    </nav>
+  <menu-navigation>
+    <div class="s-header__content">
+      <nav class="s-header__nav--desktop">
+        <ul class="s-header__nav-list">
+          {% for link in section.settings.menu.links -%}
+            <li class="s-header__nav-item">{{ link.title | link_to: link.url }}</li>
+          {%- endfor %}
+        </ul>
+      </nav>
 
-    <div class="s-header__icons">
-      <button class="s-header__icons-btn">
-        <div class="s-header__icon">
-          {% render 'icon-search' %}
-        </div>
-      </button>
+      <div class="s-header__icons">
+        <button class="s-header__icons-btn">
+          <div class="s-header__icon">
+            {% render 'icon-search' %}
+          </div>
+        </button>
 
-      <button class="s-header__icons-btn">
-        <div class="s-header__icon">
-          <a href="{{ routes.cart_url }}">
-            {% render 'icon-cart' %}
+        <button class="s-header__icons-btn">
+          <div class="s-header__icon s-header__icon--account">
+            {% render 'icon-account' %}
+          </div>
+        </button>
+
+        <button class="s-header__icons-btn">
+          <div class="s-header__icon">
+            <a href="{{ routes.cart_url }}">
+              {% render 'icon-cart' %}
+            </a>
+          </div>
+        </button>
+
+        <button class="s-header__icons-btn">
+          <div class="s-header__icon s-header__icon--burger js-header__menu-button--open">
+            {% render 'icon-burger-menu' %}
+          </div>
+        </button>
+      </div>
+    </div>
+
+    <div class="s-header__menu js-header__menu">
+      <div class="s-header__menu-top">
+        <div class="s-header__logo-container">
+          <a class="s-header__logo-link" href="/">
+            {% if section.settings.logo %}
+              {% render 'image',
+                image: section.settings.logo,
+                max_width: 122,
+                max_height: 15,
+                preload: true,
+                ratio_wrap: false
+              %}
+            {% endif %}
           </a>
         </div>
-      </button>
 
-      <button class="s-header__icons-btn">
-        <div class="s-header__icon s-header__icon--burger">
-          {% render 'icon-burger-menu' %}
+        <div class="s-header__icon js-header__menu-button--close">
+          {% render 'icon-close' %}
         </div>
-      </button>
+      </div>
+
+      <div class="s-header__menu-content"></div>
     </div>
-  </div>
+  </menu-navigation>
 </div>
 
 {% schema %}

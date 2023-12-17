@@ -1,65 +1,29 @@
 {{ 'section-header.css' | asset_url | stylesheet_tag }}
 
-<script src="{{ 'menu-navigation.js' | asset_url }}" defer></script>
+<script src="{{ 'section-header.js' | asset_url }}" defer></script>
 
-<div class="s-header">
-  <div class="s-header__logo-container">
-    <a class="s-header__logo-link" href="/">
-      {% if section.settings.logo %}
-        {% render 'image',
-          image: section.settings.logo,
-          max_width: 122,
-          max_height: 15,
-          preload: true,
-          ratio_wrap: false
-        %}
-      {% endif %}
-    </a>
-  </div>
+<menu-navigation>
+  <div class="s-header">
+    <div class="s-header__logo-container">
+      <a class="s-header__logo-link" href="/">
+        {% if section.settings.logo %}
+          {% render 'image',
+            image: section.settings.logo,
+            max_width: 122,
+            max_height: 15,
+            preload: true,
+            ratio_wrap: false
+          %}
+        {% endif %}
+      </a>
+    </div>
 
-  <menu-navigation>
     <div class="s-header__content">
       <nav class="s-header__nav--desktop">
         <ul class="s-header__nav-list">
           {% for link in section.settings.menu.links -%}
             <li class="s-header__nav-item">
               {{ link.title | link_to: link.url }}
-
-              {% comment %}
-                {%- if link.links != blank -%}
-                  <ul>
-                    {%- for child_link in link.links -%}
-                      <li>
-                        <a
-                          href="{{ child_link.url }}"
-                          {% if child_link.active %}
-                            aria-current="page"
-                          {% endif %}
-                        >
-                          {{ child_link.title }}
-                        </a>
-
-                        {%- if child_link.links != blank -%}
-                          <ul>
-                            {%- for grandchild_link in child_link.links -%}
-                              <li>
-                                <a
-                                  href="{{ grandchild_link.url }}"
-                                  {% if grandchild_link.active %}
-                                    aria-current="page"
-                                  {% endif %}
-                                >
-                                  {{ grandchild_link.title }}
-                                </a>
-                              </li>
-                            {%- endfor -%}
-                          </ul>
-                        {%- endif -%}
-                      </li>
-                    {%- endfor -%}
-                  </ul>
-                {%- endif -%}
-              {% endcomment %}
             </li>
           {%- endfor %}
         </ul>
@@ -115,10 +79,35 @@
         </div>
       </div>
 
-      <div class="s-header__menu-content"></div>
+      зробити компонент обгортку для категорій з превент дефолтом або прибрати лінки поки що хз, додати стилі, мейбі
+      запитати як краще рендерити контент кожної категорії на клік. Клікабельна зона в усю ширину плюс шеврон, під низ
+      контента афтер з палкою
+
+      <div class="s-header__menu-content">
+        {% for link in section.settings.menu.links -%}
+          {%- if link.links != blank -%}
+            <ul class="s-header__menu-list">
+              {%- for child_link in link.links -%}
+                <li class="s-header__menu-item">
+                  <a
+                    href="{{ child_link.url }}"
+                    {% if child_link.active %}
+                      aria-current="page"
+                    {% endif %}
+                  >
+                    {{ child_link.title }}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        {%- endfor %}
+      </div>
+
+      <div class="s-header__menu-bottom"></div>
     </div>
-  </menu-navigation>
-</div>
+  </div>
+</menu-navigation>
 
 {% schema %}
 {

@@ -64,11 +64,11 @@
             "label": "Shopify"
           },
           {
-            "value": "example-font",
-            "label": "Example font"
+            "value": "roboto",
+            "label": "Roboto"
           }
         ],
-        "default": "shopify"
+        "default": "roboto"
       },
       {
         "type": "font_picker",
@@ -91,11 +91,11 @@
             "label": "Shopify"
           },
           {
-            "value": "example-font",
-            "label": "Example font"
+            "value": "roboto",
+            "label": "Roboto"
           }
         ],
-        "default": "shopify"
+        "default": "roboto"
       },
       {
         "type": "font_picker",

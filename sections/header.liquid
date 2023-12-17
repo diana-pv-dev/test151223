@@ -79,32 +79,36 @@
         </div>
       </div>
 
-      зробити компонент обгортку для категорій з превент дефолтом або прибрати лінки поки що хз, додати стилі, мейбі
-      запитати як краще рендерити контент кожної категорії на клік. Клікабельна зона в усю ширину плюс шеврон, під низ
-      контента афтер з палкою
+      {% comment %}
+        зробити компонент обгортку для категорій з превент дефолтом або прибрати лінки поки що хз, додати стилі, мейбі
+        запитати як краще рендерити контент кожної категорії на клік. Клікабельна зона в усю ширину плюс шеврон
+      {% endcomment %}
 
-      <div class="s-header__menu-content">
+      <nav class="s-header__menu-content">
         {% for link in section.settings.menu.links -%}
           {%- if link.links != blank -%}
             <ul class="s-header__menu-list">
               {%- for child_link in link.links -%}
                 <li class="s-header__menu-item">
                   <a
+                    class="s-header__menu-link"
                     href="{{ child_link.url }}"
                     {% if child_link.active %}
                       aria-current="page"
                     {% endif %}
                   >
                     {{ child_link.title }}
+
+                    {% unless forloop.first %}
+                      {% render 'icon-chevron' %}
+                    {% endunless %}
                   </a>
                 </li>
               {%- endfor -%}
             </ul>
           {%- endif -%}
         {%- endfor %}
-      </div>
-
-      <div class="s-header__menu-bottom"></div>
+      </nav>
     </div>
   </div>
 </menu-navigation>

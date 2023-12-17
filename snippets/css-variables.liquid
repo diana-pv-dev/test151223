@@ -9,7 +9,7 @@
   	{{ font_heading_bold_italic | font_face: font_display: 'swap' }}
   {% endif %}
 
-     {% if settings.font_body == 'shopify' %}
+  {% if settings.font_body == 'shopify' %}
   	{{ settings.font_body | font_face }}
 
   	{%- assign font_body_bold = settings.font_body | font_modify: 'weight', 'bolder' -%}
@@ -17,7 +17,23 @@
 
   	{{ font_body_bold | font_face: font_display: 'swap' }}
   	{{ font_body_bold_italic | font_face: font_display: 'swap' }}
-     {% endif %}
+  {% endif %}
+
+  @font-face {
+    font-family: 'Roboto';
+    src: url({{ 'Roboto-Regular.woff2' | asset_url }}) format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Roboto';
+    src: url({{ 'Roboto-Medium.woff2' | asset_url }}) format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
 
      :root {
          --color-background: {{ settings.color_background }};
@@ -28,19 +44,15 @@
   	{% case settings.font_heading %}
   		{% when 'shopify' %}
   	        --font-heading: {{ settings.font_heading.family }}, {{ settings.font_heading.fallback_families }};
-  		{% when 'graphik' %}
-  	        --font-heading: 'Graphik', sans-serif;
-  		{% when 'playfair-display' %}
-  	        --font-heading: 'Playfair Display', serif;
+  		{% when 'roboto' %}
+  	        --font-heading: 'Roboto', sans-serif;
   	{% endcase %}
 
   	{% case settings.font_body %}
   		{% when 'shopify' %}
   	        --font-body: {{ settings.font_body.family }}, {{ settings.font_body.fallback_families }};
-  		{% when 'graphik' %}
-  	        --font-body: 'Graphik', sans-serif;
-  		{% when 'playfair-display' %}
-  	        --font-body: 'Playfair Display', serif;
+  		{% when 'roboto' %}
+  	        --font-body: 'Roboto', sans-serif;
   	{% endcase %}
      }
 </style>

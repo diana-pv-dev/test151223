@@ -12,10 +12,20 @@
               "promo_link": "",
               "promo_text": "New Look"
             }
+          },
+          "48098078-4166-4563-8795-006cf1209829": {
+            "type": "promo_block",
+            "settings": {
+              "categody_title": "Accessories",
+              "promo_img": "shopify:\/\/shop_images\/Scherm_afbeelding_2023-12-05_om_12.00.33_2000x_32756e6f-15c1-4080-9f99-24b2b82e6803.webp",
+              "promo_link": "",
+              "promo_text": "Chic Wallet"
+            }
           }
         },
         "block_order": [
-          "38993063-8aa8-4ffd-af97-51eabc841cc1"
+          "38993063-8aa8-4ffd-af97-51eabc841cc1",
+          "48098078-4166-4563-8795-006cf1209829"
         ],
         "settings": {
           "logo": "shopify:\/\/shop_images\/logo.png",

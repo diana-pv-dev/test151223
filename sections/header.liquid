@@ -9,8 +9,8 @@
         {% if section.settings.logo %}
           {% render 'image',
             image: section.settings.logo,
-            max_width: 122,
-            max_height: 15,
+            max_width: 135,
+            max_height: 17,
             preload: true,
             ratio_wrap: false
           %}
@@ -109,6 +109,37 @@
           {%- endif -%}
         {%- endfor %}
       </nav>
+
+      <div class="s-header__menu-bottom">
+        <ul class="s-header__menu-list s-header__menu-list--bottom">
+          <li class="s-header__menu-item">
+            <a
+              class="s-header__menu-link"
+              href="#"
+            >
+              Sign In / Register
+            </a>
+          </li>
+
+          <li class="s-header__menu-item">
+            <a
+              class="s-header__menu-link"
+              href="#"
+            >
+              Customer Service
+            </a>
+          </li>
+
+          <li class="s-header__menu-item">
+            <a
+              class="s-header__menu-link"
+              href="#"
+            >
+              United Kingdom
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </menu-navigation>

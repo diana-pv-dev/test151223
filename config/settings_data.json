@@ -21,11 +21,24 @@
               "promo_link": "",
               "promo_text": "Chic Wallet"
             }
+          },
+          "f7bc6bea-78f4-42f1-9971-069d3c323013": {
+            "type": "promo_block_double",
+            "settings": {
+              "categody_title": "Shoes",
+              "promo_img_one": "shopify:\/\/shop_images\/ISA-BOOT-BLACK-BUCKLE---BACK_2000x_35334874-63b9-4e7a-a773-4dc9364c4c56.webp",
+              "promo_link_one": "",
+              "promo_text_one": "Isa Boot",
+              "promo_img_two": "shopify:\/\/shop_images\/JULIO_STRASS_SANDAL_SILVER_1_2000x_9bd37b3c-70e0-4e91-8fe0-199923140d63.webp",
+              "promo_link_two": "",
+              "promo_text_two": "Julio Strass Sandal"
+            }
           }
         },
         "block_order": [
           "38993063-8aa8-4ffd-af97-51eabc841cc1",
-          "48098078-4166-4563-8795-006cf1209829"
+          "48098078-4166-4563-8795-006cf1209829",
+          "f7bc6bea-78f4-42f1-9971-069d3c323013"
         ],
         "settings": {
           "logo": "shopify:\/\/shop_images\/logo.png",

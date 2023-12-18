@@ -79,38 +79,67 @@
         </div>
       </div>
 
-      {% comment %}
-        зробити компонент обгортку для категорій з превент дефолтом або прибрати лінки поки що хз, додати стилі, мейбі
-        запитати як краще рендерити контент кожної категорії на клік. Клікабельна зона в усю ширину плюс шеврон
-      {% endcomment %}
-
       <nav class="s-header__menu-content">
         {% for link in section.settings.menu.links -%}
           {%- if link.links != blank -%}
             <ul class="s-header__menu-list">
               {%- for child_link in link.links -%}
-                <li class="s-header__menu-item">
-                  <a
-                    class="s-header__menu-link"
-                    href="{{ child_link.url }}"
-                    {% if child_link.active %}
-                      aria-current="page"
-                    {% endif %}
-                  >
-                    {{ child_link.title }}
+                <expanded-menu>
+                  <li class="s-header__menu-item">
+                    <span class=" s-header__menu-link js-expanded-menu__btn--open">
+                      {% comment %}
+                        <a
+                          class="s-header__menu-link js-expanded-menu__btn--open"
+                          href="{{ child_link.url }}"
+                        >
+                      {% endcomment %}
+                      {{ child_link.title }}
 
-                    {% unless forloop.first %}
-                      {% render 'icon-chevron' %}
-                    {% endunless %}
-                  </a>
-                </li>
+                      {% unless forloop.first %}
+                        {% render 'icon-chevron' %}
+                      {% endunless %}
+                      {% comment %} </a> {% endcomment %}
+                    </span>
+
+                    <div class="s-header__menu-item--expanded-menu expanded-menu js-expanded-menu">
+                      <div class="expanded-menu__top">
+                        <button class="expanded-menu__btn expanded-menu__btn--back js-expanded-menu__btn--back">
+                          {% render 'icon-chevron' %}
+                        </button>
+
+                        <h4 class="expanded-menu__title">
+                          {% unless forloop.first %}
+                            All
+                          {% endunless %}
+                          {{ child_link.title }}
+                        </h4>
+
+                        <button class="expanded-menu__btn expanded-menu__btn--close js-expanded-menu__btn--close">
+                          {% render 'icon-close' %}
+                        </button>
+                      </div>
+
+                      <ul class="expanded-menu__list">
+                        {%- for grandchild_link in child_link.links -%}
+                          <li class="expanded-menu__item">
+                            <a class="expanded-menu__link" href="{{ grandchild_link.url }}">
+                              <span>
+                                {{ grandchild_link.title }}
+                              </span>
+                            </a>
+                          </li>
+                        {%- endfor -%}
+
+                        <li></li>
+                      </ul>
+                    </div>
+                  </li>
+                </expanded-menu>
               {%- endfor -%}
             </ul>
           {%- endif -%}
         {%- endfor %}
-      </nav>
 
-      <div class="s-header__menu-bottom">
         <ul class="s-header__menu-list s-header__menu-list--bottom">
           <li class="s-header__menu-item">
             <a
@@ -132,14 +161,14 @@
 
           <li class="s-header__menu-item">
             <a
-              class="s-header__menu-link"
+              class="s-header__menu-link s-header__menu-link--currency"
               href="#"
             >
-              United Kingdom
+              United Kingdom (£)
             </a>
           </li>
         </ul>
-      </div>
+      </nav>
     </div>
   </div>
 </menu-navigation>

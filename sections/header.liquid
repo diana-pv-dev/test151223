@@ -86,20 +86,19 @@
               {%- for child_link in link.links -%}
                 <expanded-menu>
                   <li class="s-header__menu-item">
-                    <span class=" s-header__menu-link js-expanded-menu__btn--open">
-                      {% comment %}
-                        <a
-                          class="s-header__menu-link js-expanded-menu__btn--open"
-                          href="{{ child_link.url }}"
-                        >
-                      {% endcomment %}
-                      {{ child_link.title }}
-
-                      {% unless forloop.first %}
+                    {% if forloop.first %}
+                      <a
+                        class="s-header__menu-link"
+                        href="{{ child_link.url }}"
+                      >
+                        {{ child_link.title }}
+                      </a>
+                    {% else %}
+                      <span class=" s-header__menu-link js-expanded-menu__btn--open">
+                        {{ child_link.title }}
                         {% render 'icon-chevron' %}
-                      {% endunless %}
-                      {% comment %} </a> {% endcomment %}
-                    </span>
+                      </span>
+                    {% endif %}
 
                     <div class="s-header__menu-item--expanded-menu expanded-menu js-expanded-menu">
                       <div class="expanded-menu__top">

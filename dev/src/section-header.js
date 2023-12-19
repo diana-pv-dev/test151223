@@ -75,7 +75,6 @@ class MenuNavigation extends HTMLElement {
     this.menuBackground.style.display = 'block'
     this.menuBackground.style.opacity = '26%'
     this.menuStatus = 'open'
-    console.log('menu open')
   }
 
   menuClose() {
@@ -83,12 +82,11 @@ class MenuNavigation extends HTMLElement {
     this.menuStatus = 'closed'
     this.menuBackground.style.display = 'none'
     this.menuBackground.style.opacity = '0'
-    console.log('menu closed')
   }
 
 }
 
-class ExpandedMenu extends HTMLElement {
+class ExpandedMenuMobile extends HTMLElement {
   constructor() {
     super()
   }
@@ -131,15 +129,48 @@ class ExpandedMenu extends HTMLElement {
     this.expandedMenu.style.boxShadow = 'none'
     this.expandedMenuStatus = 'closed'
   }
+}
 
-  exitMenu() {
-    this.menu.style.left = '-100%'
-    this.expandedMenu.style.left = '-100%'
-    this.expandedMenu.style.boxShadow = 'none'
+class ExpandedMenu extends HTMLElement {
+  constructor() {
+    super()
+  }
+
+  connectedCallback() {
+    this.expandedMenu = this.querySelector('.js-menu-desktop-expanded')
+    this.openBtn = this.querySelector('.js-menu-desktop-expanded--open')
     this.expandedMenuStatus = 'closed'
+    this.openBtn.addEventListener('click', () => this.toggleMenu())
+    this.menuBackground.addEventListener('click', () => this.menuClose())
+  }
+
+  disconnectedCallback() {
+    this.openBtn.removeEventListener('click', () => this.toggleMenu())
+  }
+
+  toggleMenu() {
+    if (this.expandedMenuStatus == 'closed') {
+      this.menuOpen()
+
+    } else {
+      this.menuClose()
+    }
+  }
+
+  menuOpen() {
+    this.expandedMenu.classList.add("menu-desktop-expanded--active")
+    this.expandedMenuStatus = 'open'
+    console.log('open e')
+  }
+
+  menuClose() {
+    this.expandedMenu.classList.remove("menu-desktop-expanded--active")
+    this.expandedMenuStatus = 'closed'
+    console.log('close e')
   }
 }
 
 customElements.define('menu-navigation-mobile', MenuNavigationMobile)
 customElements.define('menu-navigation', MenuNavigation)
+customElements.define('expanded-menu-mobile', ExpandedMenuMobile)
 customElements.define('expanded-menu', ExpandedMenu)

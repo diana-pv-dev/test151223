@@ -132,42 +132,45 @@ class ExpandedMenuMobile extends HTMLElement {
 }
 
 class ExpandedMenu extends HTMLElement {
+  activeMenu = null;
+
   constructor() {
     super()
   }
 
+  // event.target 
   connectedCallback() {
-    this.expandedMenu = this.querySelector('.js-menu-desktop-expanded')
-    this.openBtn = this.querySelector('.js-menu-desktop-expanded--open')
-    this.expandedMenuStatus = 'closed'
-    this.openBtn.addEventListener('click', () => this.toggleMenu())
+    this.menuBackground = this.querySelector('.js-menu-desktop--bgd')
+    this.openBtns = this.querySelectorAll('.js-menu-desktop-expanded--open')
+    this.closeBtn =  this.querySelector('.js-menu-desktop--close')
+
+    for (const openBtn of this.openBtns) {
+      openBtn.addEventListener('click', (event) => this.toggleMenu(event))
+    }
+
     this.menuBackground.addEventListener('click', () => this.menuClose())
+    this.closeBtn.addEventListener('click', () => this.menuClose())
   }
 
   disconnectedCallback() {
-    this.openBtn.removeEventListener('click', () => this.toggleMenu())
-  }
-
-  toggleMenu() {
-    if (this.expandedMenuStatus == 'closed') {
-      this.menuOpen()
-
-    } else {
-      this.menuClose()
+    for (const openBtn of this.openBtns) {
+      openBtn.removeEventListener('click', () => this.toggleMenu())
     }
   }
 
-  menuOpen() {
-    this.expandedMenu.classList.add("menu-desktop-expanded--active")
-    this.expandedMenuStatus = 'open'
-    console.log('open e')
+  toggleMenu(event) {
+    if (this.activeMenu !== null) {
+      this.activeMenu.nextElementSibling.classList.remove('menu-desktop-expanded--active')
+    }
+
+    this.activeMenu = event.currentTarget
+    this.activeMenu.nextElementSibling.classList.add('menu-desktop-expanded--active');
   }
 
   menuClose() {
-    this.expandedMenu.classList.remove("menu-desktop-expanded--active")
-    this.expandedMenuStatus = 'closed'
-    console.log('close e')
+    this.activeMenu.nextElementSibling.classList.remove('menu-desktop-expanded--active');
   }
+
 }
 
 customElements.define('menu-navigation-mobile', MenuNavigationMobile)

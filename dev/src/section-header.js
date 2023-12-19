@@ -41,6 +41,8 @@ class MenuNavigationMobile extends HTMLElement {
 }
 
 class MenuNavigation extends HTMLElement {
+  activeMenu = null;
+
   constructor() {
     super()
   }
@@ -49,8 +51,15 @@ class MenuNavigation extends HTMLElement {
     this.menu = this.querySelector('.js-menu-desktop')
     this.menuBackground = this.querySelector('.js-menu-desktop--bgd')
     this.openBtn = this.querySelector('.js-menu-desktop--open')
+    this.openExpBtns = this.querySelectorAll('.js-menu-desktop-expanded--open')
     this.closeBtn = this.querySelector('.js-menu-desktop--close')
+
     this.menuStatus = 'closed'
+
+    for (const openExpBtn of this.openExpBtns) {
+      openExpBtn.addEventListener('click', (event) => this.toggleMenuExp(event))
+    }
+
     this.openBtn.addEventListener('click', () => this.toggleMenu())
     this.closeBtn.addEventListener('click', () => this.toggleMenu())
     this.menuBackground.addEventListener('click', () => this.menuClose())
@@ -58,8 +67,21 @@ class MenuNavigation extends HTMLElement {
   }
 
   disconnectedCallback() {
+    for (const openBtn of this.openBtns) {
+      openBtn.removeEventListener('click', (event) => this.toggleMenuExp(event))
+    }
     this.openBtn.removeEventListener('click', this.toggleMenu)
     this.closeBtn.removeEventListener('click', this.toggleMenu)
+    this.menuBackground.removeEventListener('click', () => this.menuClose())
+  }
+
+  toggleMenuExp(event) {
+    if (this.activeMenu !== null) {
+      this.activeMenu.nextElementSibling.classList.remove('menu-desktop-expanded--active')
+    }
+
+    this.activeMenu = event.currentTarget
+    this.activeMenu.nextElementSibling.classList.add('menu-desktop-expanded--active');
   }
 
   toggleMenu() {
@@ -82,6 +104,7 @@ class MenuNavigation extends HTMLElement {
     this.menuStatus = 'closed'
     this.menuBackground.style.display = 'none'
     this.menuBackground.style.opacity = '0'
+    this.activeMenu.nextElementSibling.classList.remove('menu-desktop-expanded--active');
   }
 
 }
@@ -131,49 +154,6 @@ class ExpandedMenuMobile extends HTMLElement {
   }
 }
 
-class ExpandedMenu extends HTMLElement {
-  activeMenu = null;
-
-  constructor() {
-    super()
-  }
-
-  // event.target 
-  connectedCallback() {
-    this.menuBackground = this.querySelector('.js-menu-desktop--bgd')
-    this.openBtns = this.querySelectorAll('.js-menu-desktop-expanded--open')
-    this.closeBtn =  this.querySelector('.js-menu-desktop--close')
-
-    for (const openBtn of this.openBtns) {
-      openBtn.addEventListener('click', (event) => this.toggleMenu(event))
-    }
-
-    this.menuBackground.addEventListener('click', () => this.menuClose())
-    this.closeBtn.addEventListener('click', () => this.menuClose())
-  }
-
-  disconnectedCallback() {
-    for (const openBtn of this.openBtns) {
-      openBtn.removeEventListener('click', () => this.toggleMenu())
-    }
-  }
-
-  toggleMenu(event) {
-    if (this.activeMenu !== null) {
-      this.activeMenu.nextElementSibling.classList.remove('menu-desktop-expanded--active')
-    }
-
-    this.activeMenu = event.currentTarget
-    this.activeMenu.nextElementSibling.classList.add('menu-desktop-expanded--active');
-  }
-
-  menuClose() {
-    this.activeMenu.nextElementSibling.classList.remove('menu-desktop-expanded--active');
-  }
-
-}
-
 customElements.define('menu-navigation-mobile', MenuNavigationMobile)
 customElements.define('menu-navigation', MenuNavigation)
 customElements.define('expanded-menu-mobile', ExpandedMenuMobile)
-customElements.define('expanded-menu', ExpandedMenu)

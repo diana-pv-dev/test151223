@@ -20,7 +20,7 @@
       </div>
 
       <div class="s-header__content">
-        <nav class="s-header__nav--desktop">
+        <nav class="s-header__nav s-header__nav--desktop s-header__nav--desktop--direction--rtl">
           <div class="s-header__nav-bgd js-menu-desktop--bgd"></div>
           <ul class="s-header__nav-list">
             {% for link in section.settings.menu.links -%}
@@ -82,7 +82,7 @@
             </a>
           </div>
 
-          <div class="s-header__icon js-header__menu-button--close">
+          <div class="s-header__icon s-header__icon--close js-header__menu-button--close">
             {% render 'icon-close' %}
           </div>
         </div>
@@ -92,65 +92,94 @@
             {%- if link.links != blank -%}
               <ul class="s-header__menu-list">
                 {%- for child_link in link.links -%}
-                  <expanded-menu-mobile>
-                    <li class="s-header__menu-item">
-                      {% if forloop.first %}
-                        <a
-                          class="s-header__menu-link"
-                          href="{{ child_link.url }}"
-                        >
-                          {{ child_link.title }}
-                        </a>
-                      {% else %}
-                        <span class=" s-header__menu-link js-expanded-menu__btn--open">
-                          {{ child_link.title }}
+                  <li class="s-header__menu-item">
+                    {% if forloop.first %}
+                      <a
+                        class="s-header__menu-link"
+                        href="{{ child_link.url }}"
+                      >
+                        {{ child_link.title }}
+                      </a>
+                    {% else %}
+                      {% comment %} оце наш актів менью для телефона {% endcomment %}
+                      <span class=" s-header__menu-link s-header__menu-link js-expanded-menu__btn--open">
+                        {{ child_link.title }}
+
+                        <span class="s-header__menu-link--chevron--direction--rtl">
                           {% render 'icon-chevron' %}
                         </span>
-                      {% endif %}
+                      </span>
+                    {% endif %}
 
-                      <div class="s-header__menu-item--expanded-menu expanded-menu js-expanded-menu">
-                        <div class="expanded-menu__top">
-                          <button class="expanded-menu__btn expanded-menu__btn--back js-expanded-menu__btn--back">
-                            {% render 'icon-chevron' %}
-                          </button>
+                    <div class="s-header__menu-item--expanded-menu expanded-menu js-expanded-menu">
+                      <div class="expanded-menu__top">
+                        <button class="expanded-menu__btn expanded-menu__btn--back js-expanded-menu__btn--back">
+                          {% render 'icon-chevron' %}
+                        </button>
 
-                          <h4 class="expanded-menu__title">
-                            {% unless forloop.first %}
-                              All
-                            {% endunless %}
-                            {{ child_link.title }}
-                          </h4>
+                        <h4 class="expanded-menu__title">
+                          {% unless forloop.first %}
+                            All
+                          {% endunless %}
+                          {{ child_link.title }}
+                        </h4>
 
-                          <button class="expanded-menu__btn expanded-menu__btn--close js-expanded-menu__btn--close">
-                            {% render 'icon-close' %}
-                          </button>
-                        </div>
+                        <button class="expanded-menu__btn expanded-menu__btn--close js-expanded-menu__btn--close">
+                          {% render 'icon-close' %}
+                        </button>
+                      </div>
 
-                        <ul class="expanded-menu__list">
-                          {%- for grandchild_link in child_link.links -%}
-                            <li class="expanded-menu__item">
-                              <a class="expanded-menu__link" href="{{ grandchild_link.url }}">
-                                <span>
-                                  {{ grandchild_link.title }}
-                                </span>
-                              </a>
-                            </li>
-                          {%- endfor -%}
+                      <ul class="expanded-menu__list">
+                        {%- for grandchild_link in child_link.links -%}
+                          <li class="expanded-menu__item">
+                            <a class="expanded-menu__link" href="{{ grandchild_link.url }}">
+                              <span>
+                                {{ grandchild_link.title }}
+                              </span>
+                            </a>
+                          </li>
+                        {%- endfor -%}
 
-                          <li class="expanded-menu__promo">
-                            {% for block in section.blocks %}
-                              {% case block.type %}
-                                {% when 'promo_block' %}
-                                  {% if block.settings.categody_title == child_link.title %}
+                        <li class="expanded-menu__promo">
+                          {% for block in section.blocks %}
+                            {% case block.type %}
+                              {% when 'promo_block' %}
+                                {% if block.settings.categody_title == child_link.title %}
+                                  <div class="expanded-menu__promo-item">
+                                    <a
+                                      class="expanded-menu__promo-item--link"
+                                      href="{{ block.settings.promo_link }}"
+                                      alt="{{ block.settings.promo_text | escape }}"
+                                    >
+                                      {%
+                                        render 'image-lazy',
+                                        image: block.settings.promo_img,
+                                        max_width: 360,
+                                        max_height: 360,
+                                      %}
+                                    </a>
+
+                                    <div class="expanded-menu__promo-item--bottom">
+                                      <p class="expanded-menu__promo-item--text">
+                                        {{ block.settings.promo_text }}
+                                      </p>
+                                      <a class="expanded-menu__promo-item--shop" href="#">Shop</a>
+                                    </div>
+                                  </div>
+                                {% endif %}
+
+                              {% when 'promo_block_double' %}
+                                {% if block.settings.categody_title == child_link.title %}
+                                  <div class="expanded-menu__promo-items">
                                     <div class="expanded-menu__promo-item">
                                       <a
                                         class="expanded-menu__promo-item--link"
-                                        href="{{ block.settings.promo_link }}"
-                                        alt="{{ block.settings.promo_text | escape }}"
+                                        href="{{ block.settings.promo_link_one }}"
+                                        alt="{{ block.settings.promo_text_one | escape }}"
                                       >
                                         {%
                                           render 'image-lazy',
-                                          image: block.settings.promo_img,
+                                          image: block.settings.promo_img_one,
                                           max_width: 360,
                                           max_height: 360,
                                         %}
@@ -158,68 +187,41 @@
 
                                       <div class="expanded-menu__promo-item--bottom">
                                         <p class="expanded-menu__promo-item--text">
-                                          {{ block.settings.promo_text }}
+                                          {{ block.settings.promo_text_one }}
                                         </p>
                                         <a class="expanded-menu__promo-item--shop" href="#">Shop</a>
                                       </div>
                                     </div>
-                                  {% endif %}
 
-                                {% when 'promo_block_double' %}
-                                  {% if block.settings.categody_title == child_link.title %}
-                                    <div class="expanded-menu__promo-items">
-                                      <div class="expanded-menu__promo-item">
-                                        <a
-                                          class="expanded-menu__promo-item--link"
-                                          href="{{ block.settings.promo_link_one }}"
-                                          alt="{{ block.settings.promo_text_one | escape }}"
-                                        >
-                                          {%
-                                            render 'image-lazy',
-                                            image: block.settings.promo_img_one,
-                                            max_width: 360,
-                                            max_height: 360,
-                                          %}
-                                        </a>
+                                    <div class="expanded-menu__promo-item">
+                                      <a
+                                        class="expanded-menu__promo-item--link"
+                                        href="{{ block.settings.promo_link_two }}"
+                                        alt="{{ block.settings.promo_text_two | escape }}"
+                                      >
+                                        {%
+                                          render 'image-lazy',
+                                          image: block.settings.promo_img_two,
+                                          max_width: 360,
+                                          max_height: 360,
+                                        %}
+                                      </a>
 
-                                        <div class="expanded-menu__promo-item--bottom">
-                                          <p class="expanded-menu__promo-item--text">
-                                            {{ block.settings.promo_text_one }}
-                                          </p>
-                                          <a class="expanded-menu__promo-item--shop" href="#">Shop</a>
-                                        </div>
-                                      </div>
-
-                                      <div class="expanded-menu__promo-item">
-                                        <a
-                                          class="expanded-menu__promo-item--link"
-                                          href="{{ block.settings.promo_link_two }}"
-                                          alt="{{ block.settings.promo_text_two | escape }}"
-                                        >
-                                          {%
-                                            render 'image-lazy',
-                                            image: block.settings.promo_img_two,
-                                            max_width: 360,
-                                            max_height: 360,
-                                          %}
-                                        </a>
-
-                                        <div class="expanded-menu__promo-item--bottom">
-                                          <p class="expanded-menu__promo-item--text">
-                                            {{ block.settings.promo_text_two }}
-                                          </p>
-                                          <a class="expanded-menu__promo-item--shop" href="#">Shop</a>
-                                        </div>
+                                      <div class="expanded-menu__promo-item--bottom">
+                                        <p class="expanded-menu__promo-item--text">
+                                          {{ block.settings.promo_text_two }}
+                                        </p>
+                                        <a class="expanded-menu__promo-item--shop" href="#">Shop</a>
                                       </div>
                                     </div>
-                                  {% endif %}
-                              {% endcase %}
-                            {% endfor %}
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
-                  </expanded-menu-mobile>
+                                  </div>
+                                {% endif %}
+                            {% endcase %}
+                          {% endfor %}
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
                 {%- endfor -%}
               </ul>
             {%- endif -%}
@@ -229,8 +231,8 @@
         </nav>
       </div>
 
-      <div class="s-header__menu-desktop menu-desktop js-menu-desktop">
-        <div class="menu-desktop__content">
+      <div class="s-header__menu-desktop menu-desktop menu-desktop--direction--rtl js-menu-desktop">
+        <div class="menu-desktop__content menu-desktop__content--direction--rtl ">
           <button class="menu-desktop__close-btn js-menu-desktop--close">
             {% render 'icon-close' %}
           </button>
@@ -257,7 +259,7 @@
                         </span>
                       {% endif %}
 
-                      <div class="menu-desktop-expanded js-menu-desktop-expanded">
+                      <div class="menu-desktop-expanded menu-desktop-expanded--direction--rtl js-menu-desktop-expanded">
                         <ul class="menu-desktop-expanded__list">
                           {%- for grandchild_link in child_link.links -%}
                             <li class="menu-desktop-expanded__item">
@@ -552,7 +554,7 @@
           "type": "text",
           "id": "promo_text_two",
           "label": "Text for the promo block"
-        }
+        },
         {
           "type": "text",
           "id": "promo_text_two_ar",

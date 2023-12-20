@@ -144,77 +144,153 @@
                           {% for block in section.blocks %}
                             {% case block.type %}
                               {% when 'promo_block' %}
-                                {% if block.settings.categody_title == child_link.title %}
-                                  <div class="expanded-menu__promo-item">
-                                    <a
-                                      class="expanded-menu__promo-item--link"
-                                      href="{{ block.settings.promo_link }}"
-                                      alt="{{ block.settings.promo_text | escape }}"
-                                    >
-                                      {%
-                                        render 'image-lazy',
-                                        image: block.settings.promo_img,
-                                        max_width: 360,
-                                        max_height: 360,
-                                      %}
-                                    </a>
+                                {% if localization.language.iso_code == 'ar' %}
+                                  {% if block.settings.categody_title_ar == child_link.title %}
+                                    <div class="expanded-menu__promo-item">
+                                      <a
+                                        class="expanded-menu__promo-item--link"
+                                        href="{{ block.settings.promo_link_ar }}"
+                                        alt="{{ block.settings.promo_text_ar | escape }}"
+                                      >
+                                        {%
+                                          render 'image-lazy',
+                                          image: block.settings.promo_img_ar,
+                                          max_width: 360,
+                                          max_height: 360,
+                                        %}
+                                      </a>
 
-                                    <div class="expanded-menu__promo-item--bottom">
-                                      <p class="expanded-menu__promo-item--text">
-                                        {{ block.settings.promo_text }}
-                                      </p>
-                                      <a class="expanded-menu__promo-item--shop" href="#">Shop</a>
+                                      <div class="expanded-menu__promo-item--bottom">
+                                        <p class="expanded-menu__promo-item--text">
+                                          {{ block.settings.promo_text_ar }}
+                                        </p>
+                                        <a class="expanded-menu__promo-item--shop" href="#">Shop</a>
+                                      </div>
                                     </div>
-                                  </div>
+                                  {% endif %}
+                                {% else %}
+                                  {% if block.settings.categody_title == child_link.title %}
+                                    <div class="expanded-menu__promo-item">
+                                      <a
+                                        class="expanded-menu__promo-item--link"
+                                        href="{{ block.settings.promo_link }}"
+                                        alt="{{ block.settings.promo_text | escape }}"
+                                      >
+                                        {%
+                                          render 'image-lazy',
+                                          image: block.settings.promo_img,
+                                          max_width: 360,
+                                          max_height: 360,
+                                        %}
+                                      </a>
+
+                                      <div class="expanded-menu__promo-item--bottom">
+                                        <p class="expanded-menu__promo-item--text">
+                                          {{ block.settings.promo_text }}
+                                        </p>
+                                        <a class="expanded-menu__promo-item--shop" href="#">Shop</a>
+                                      </div>
+                                    </div>
+                                  {% endif %}
                                 {% endif %}
 
                               {% when 'promo_block_double' %}
-                                {% if block.settings.categody_title == child_link.title %}
-                                  <div class="expanded-menu__promo-items">
-                                    <div class="expanded-menu__promo-item">
-                                      <a
-                                        class="expanded-menu__promo-item--link"
-                                        href="{{ block.settings.promo_link_one }}"
-                                        alt="{{ block.settings.promo_text_one | escape }}"
-                                      >
-                                        {%
-                                          render 'image-lazy',
-                                          image: block.settings.promo_img_one,
-                                          max_width: 360,
-                                          max_height: 360,
-                                        %}
-                                      </a>
+                                {% if localization.language.iso_code == 'ar' %}
+                                  {% if block.settings.categody_title_ar == child_link.title %}
+                                    <div class="expanded-menu__promo-items">
+                                      <div class="expanded-menu__promo-item">
+                                        <a
+                                          class="expanded-menu__promo-item--link"
+                                          href="{{ block.settings.promo_link_one_ar }}"
+                                          alt="{{ block.settings.promo_text_one_ar | escape }}"
+                                        >
+                                          {%
+                                            render 'image-lazy',
+                                            image: block.settings.promo_img_one_ar,
+                                            max_width: 360,
+                                            max_height: 360,
+                                          %}
+                                        </a>
 
-                                      <div class="expanded-menu__promo-item--bottom">
-                                        <p class="expanded-menu__promo-item--text">
-                                          {{ block.settings.promo_text_one }}
-                                        </p>
-                                        <a class="expanded-menu__promo-item--shop" href="#">Shop</a>
+                                        <div class="expanded-menu__promo-item--bottom">
+                                          <p class="expanded-menu__promo-item--text">
+                                            {{ block.settings.promo_text_one_ar }}
+                                          </p>
+                                          <a class="expanded-menu__promo-item--shop" href="#">Shop</a>
+                                        </div>
+                                      </div>
+
+                                      <div class="expanded-menu__promo-item">
+                                        <a
+                                          class="expanded-menu__promo-item--link"
+                                          href="{{ block.settings.promo_link_two_ar }}"
+                                          alt="{{ block.settings.promo_text_two_ar | escape }}"
+                                        >
+                                          {%
+                                            render 'image-lazy',
+                                            image: block.settings.promo_img_two_ar,
+                                            max_width: 360,
+                                            max_height: 360,
+                                          %}
+                                        </a>
+
+                                        <div class="expanded-menu__promo-item--bottom">
+                                          <p class="expanded-menu__promo-item--text">
+                                            {{ block.settings.promo_text_two_ar }}
+                                          </p>
+                                          <a class="expanded-menu__promo-item--shop" href="#">Shop</a>
+                                        </div>
                                       </div>
                                     </div>
+                                  {% endif %}
+                                {% else %}
+                                  {% if block.settings.categody_title == child_link.title %}
+                                    <div class="expanded-menu__promo-items">
+                                      <div class="expanded-menu__promo-item">
+                                        <a
+                                          class="expanded-menu__promo-item--link"
+                                          href="{{ block.settings.promo_link_one }}"
+                                          alt="{{ block.settings.promo_text_one | escape }}"
+                                        >
+                                          {%
+                                            render 'image-lazy',
+                                            image: block.settings.promo_img_one,
+                                            max_width: 360,
+                                            max_height: 360,
+                                          %}
+                                        </a>
 
-                                    <div class="expanded-menu__promo-item">
-                                      <a
-                                        class="expanded-menu__promo-item--link"
-                                        href="{{ block.settings.promo_link_two }}"
-                                        alt="{{ block.settings.promo_text_two | escape }}"
-                                      >
-                                        {%
-                                          render 'image-lazy',
-                                          image: block.settings.promo_img_two,
-                                          max_width: 360,
-                                          max_height: 360,
-                                        %}
-                                      </a>
+                                        <div class="expanded-menu__promo-item--bottom">
+                                          <p class="expanded-menu__promo-item--text">
+                                            {{ block.settings.promo_text_one }}
+                                          </p>
+                                          <a class="expanded-menu__promo-item--shop" href="#">Shop</a>
+                                        </div>
+                                      </div>
 
-                                      <div class="expanded-menu__promo-item--bottom">
-                                        <p class="expanded-menu__promo-item--text">
-                                          {{ block.settings.promo_text_two }}
-                                        </p>
-                                        <a class="expanded-menu__promo-item--shop" href="#">Shop</a>
+                                      <div class="expanded-menu__promo-item">
+                                        <a
+                                          class="expanded-menu__promo-item--link"
+                                          href="{{ block.settings.promo_link_two }}"
+                                          alt="{{ block.settings.promo_text_two | escape }}"
+                                        >
+                                          {%
+                                            render 'image-lazy',
+                                            image: block.settings.promo_img_two,
+                                            max_width: 360,
+                                            max_height: 360,
+                                          %}
+                                        </a>
+
+                                        <div class="expanded-menu__promo-item--bottom">
+                                          <p class="expanded-menu__promo-item--text">
+                                            {{ block.settings.promo_text_two }}
+                                          </p>
+                                          <a class="expanded-menu__promo-item--shop" href="#">Shop</a>
+                                        </div>
                                       </div>
                                     </div>
-                                  </div>
+                                  {% endif %}
                                 {% endif %}
                             {% endcase %}
                           {% endfor %}
@@ -391,11 +467,6 @@
       "type": "link_list",
       "id": "menu",
       "label": "Menu"
-    },
-    {
-      "type": "link_list",
-      "id": "menu_ar",
-      "label": "Menu (AR)"
     }
   ],
   "blocks": [

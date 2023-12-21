@@ -1,0 +1,80 @@
+{{ 'section-footer.css' | asset_url | stylesheet_tag }}
+
+<footer class="s-footer {% if localization.language.iso_code == 'ar' %}s-footer--rtl{% endif %}">
+  <div class="s-footer__top">
+    <div class="s-footer__top-content">
+      <div class="s-footer__signup">
+        <h4 class="s-footer__signup-title">Sign Up</h4>
+        <p class="s-footer__signup-text">
+          Join the newsletter and be the first to hear about exclusives, sample sales and more
+        </p>
+
+        <form class="s-footer__signup-form signup-form">
+          <div class="signup-form__wrapper">
+            <input class="signup-form__input" type="email" name="email" id="email" placeholder="Email" required>
+
+            <button class="signup-form__button">
+              {% render 'icon-chevron' %}
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="s-footer__menu s-footer-menu">
+        <button class="s-footer-menu__button">
+          Customer Care
+          <span class="s-footer-menu__icon">
+            {% render 'icon-chevron' %}
+          </span>
+        </button>
+
+        <button class="s-footer-menu__button">
+          Terms of Service
+          <span class="s-footer-menu__icon">
+            {% render 'icon-chevron' %}
+          </span>
+        </button>
+
+        <button class="s-footer-menu__button">
+          About Wandler
+          <span class="s-footer-menu__icon">
+            {% render 'icon-chevron' %}
+          </span>
+        </button>
+      </div>
+
+      <div class="s-footer__shipment">
+        <h4 class="s-footer__shipment-title">Ship to</h4>
+        <select class="s-footer__shipment-select" name="shipment__select" id="shipment__select">
+          <option class="s-footer__shipment-option" value="1">United Kingdom (£)</option>
+          <option class="s-footer__shipment-option" value="2">United Kingdom (£)</option>
+          <option class="s-footer__shipment-option" value="3">United Kingdom (£)</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="s-footer__bottom">
+    <div class="s-footer__bottom-content">
+      <span class="s-footer__bottom-span">Copyright @ Wandler</span>
+
+      <div class="s-footer__bottom-social">
+        <a class="s-footer__bottom-social--link" href="#"> {% render 'icon-insta' %}</a>
+        <a class="s-footer__bottom-social--link" href="#">{% render 'icon-tiktok' %}</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "section-footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section settings"
+    }
+  ]
+}
+{% endschema %}

@@ -1,14 +1,11 @@
 .s-footer {
-
   &--rtl {
     direction: rtl;
   }
 
   &__top {
-
     padding: 26px 20px;
-    
-    
+
     &-content {
       margin: 0 auto;
       max-width: 430px;
@@ -23,6 +20,20 @@
         flex-direction: row;
         max-width: 1440px;
       }
+    }
+  }
+
+  &__information {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+
+    @media screen and (min-width: 768px) {
+      flex-direction: row;
+      width: 360px;
     }
   }
 

@@ -30,7 +30,14 @@
         "most_popular": "MOST POPULAR",
         "my_account": "My account"
       }
-
+    },
+    "footer": {
+      "sign_up": "Sign Up",
+      "join_news": " Join the newsletter and be the first to hear about exclusives, sample sales and more",
+      "customer_care": "Customer Care",
+      "terms_of_service": "Terms of Service",
+      "about_wandler": "About Wandler",
+      "ship_to": "Ship to"
     }
   }
 }

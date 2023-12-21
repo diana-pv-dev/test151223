@@ -4,9 +4,11 @@
   <div class="s-footer__top">
     <div class="s-footer__top-content">
       <div class="s-footer__signup">
-        <h4 class="s-footer__signup-title">Sign Up</h4>
+        <h4 class="s-footer__signup-title">
+          {{- 'sections.footer.sign_up' | t -}}
+        </h4>
         <p class="s-footer__signup-text">
-          Join the newsletter and be the first to hear about exclusives, sample sales and more
+          {{- 'sections.footer.join_news' | t -}}
         </p>
 
         <form class="s-footer__signup-form signup-form">
@@ -22,21 +24,23 @@
 
       <div class="s-footer__menu s-footer-menu">
         <button class="s-footer-menu__button">
-          Customer Care
+          {{- 'sections.footer.customer_care' | t -}}
+          <span class="s-footer-menu__icon">
+            {% render 'icon-chevron' %}
+          </span>
+        </button>
+
+        {% comment %} таку ж логіку як в хедер меню, показувати якийсь дів з посиланнями, якщо клацнути на кастомер кер ітд {% endcomment %}
+
+        <button class="s-footer-menu__button">
+          {{- 'sections.footer.terms_of_service' | t -}}
           <span class="s-footer-menu__icon">
             {% render 'icon-chevron' %}
           </span>
         </button>
 
         <button class="s-footer-menu__button">
-          Terms of Service
-          <span class="s-footer-menu__icon">
-            {% render 'icon-chevron' %}
-          </span>
-        </button>
-
-        <button class="s-footer-menu__button">
-          About Wandler
+          {{- 'sections.footer.about_wandler' | t -}}
           <span class="s-footer-menu__icon">
             {% render 'icon-chevron' %}
           </span>
@@ -44,7 +48,9 @@
       </div>
 
       <div class="s-footer__shipment">
-        <h4 class="s-footer__shipment-title">Ship to</h4>
+        <h4 class="s-footer__shipment-title">
+          {{- 'sections.footer.ship_to' | t -}}
+        </h4>
         <select class="s-footer__shipment-select" name="shipment__select" id="shipment__select">
           <option class="s-footer__shipment-option" value="1">United Kingdom (£)</option>
           <option class="s-footer__shipment-option" value="2">United Kingdom (£)</option>

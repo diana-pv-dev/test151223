@@ -124,8 +124,8 @@ class MenuNavigation extends HTMLElement {
 
   toggleMenuExp(event) {
     if (this.activeMenu !== null) {
-      if ([...this.activeMenu.nextElementSibling.classList].includes("menu-desktop-expanded--direction--rtl")) {
-        this.activeMenu.nextElementSibling.classList.remove('menu-desktop-expanded--direction--rtl--active')
+      if ([...this.activeMenu.nextElementSibling.classList].includes("menu-desktop-expanded--rtl")) {
+        this.activeMenu.nextElementSibling.classList.remove('menu-desktop-expanded--rtl--active')
       } else {
         this.activeMenu.nextElementSibling.classList.remove('menu-desktop-expanded--active')
       }
@@ -133,8 +133,8 @@ class MenuNavigation extends HTMLElement {
 
     this.activeMenu = event.currentTarget;
 
-    if ([...this.activeMenu.nextElementSibling.classList].includes("menu-desktop-expanded--direction--rtl")) {
-      this.activeMenu.nextElementSibling.classList.add('menu-desktop-expanded--direction--rtl--active');
+    if ([...this.activeMenu.nextElementSibling.classList].includes("menu-desktop-expanded--rtl")) {
+      this.activeMenu.nextElementSibling.classList.add('menu-desktop-expanded--rtl--active');
     } else {
       this.activeMenu.nextElementSibling.classList.add('menu-desktop-expanded--active');
     }
@@ -149,7 +149,7 @@ class MenuNavigation extends HTMLElement {
   }
 
   menuOpen() {
-    if ([...this.menu.classList].includes("menu-desktop--direction--rtl")) {
+    if ([...this.menu.classList].includes("menu-desktop--rtl")) {
       this.menu.style.left = 'auto'
       this.menu.style.right = '0'
     } else {
@@ -161,7 +161,7 @@ class MenuNavigation extends HTMLElement {
   }
 
   menuClose() {
-    if ([...this.menu.classList].includes("menu-desktop--direction--rtl")) {
+    if ([...this.menu.classList].includes("menu-desktop--rtl")) {
       this.menu.style.left = '100%'
       this.menu.style.right = 'auto'
     } else {
@@ -172,7 +172,7 @@ class MenuNavigation extends HTMLElement {
     this.menuBackground.style.display = 'none'
     this.menuBackground.style.opacity = '0'
     this.activeMenu.nextElementSibling.classList.remove('menu-desktop-expanded--active');
-    this.activeMenu.nextElementSibling.classList.remove('menu-desktop-expanded--direction--rtl--active')
+    this.activeMenu.nextElementSibling.classList.remove('menu-desktop-expanded--rtl--active')
   }
 
 }

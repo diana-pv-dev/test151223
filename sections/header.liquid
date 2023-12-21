@@ -30,7 +30,7 @@
       </div>
 
       <div class="s-header__content">
-        <nav class="s-header__nav s-header__nav--desktop {% if localization.language.iso_code == 'ar' %}s-header__nav--desktop--direction--rtl{% endif %} ">
+        <nav class="s-header__nav s-header__nav--desktop {% if localization.language.iso_code == 'ar' %}s-header__nav--desktop--rtl{% endif %} ">
           <div class="s-header__nav-bgd js-menu-desktop--bgd"></div>
           <ul class="s-header__nav-list">
             {% for link in section.settings.menu.links -%}
@@ -115,7 +115,7 @@
                       <span class=" s-header__menu-link s-header__menu-link js-expanded-menu__btn--open">
                         {{ child_link.title }}
 
-                        <span class="s-header__menu-link--chevron {% if localization.language.iso_code == 'ar' %}s-header__menu-link--chevron--direction--rtl{% endif %}">
+                        <span class="s-header__menu-link--chevron {% if localization.language.iso_code == 'ar' %}s-header__menu-link--chevron--rtl{% endif %}">
                           {% render 'icon-chevron' %}
                         </span>
                       </span>
@@ -329,11 +329,11 @@
         </nav>
       </div>
 
-      <div class="s-header__menu-desktop menu-desktop {% if localization.language.iso_code == 'ar' %}menu-desktop--direction--rtl{% endif %} js-menu-desktop">
+      <div class="s-header__menu-desktop menu-desktop {% if localization.language.iso_code == 'ar' %}menu-desktop--rtl{% endif %} js-menu-desktop">
         <div
           class="
             menu-desktop__content
-            {% if localization.language.iso_code == 'ar' %}menu-desktop__content--direction--rtl{% endif %}
+            {% if localization.language.iso_code == 'ar' %}menu-desktop__content--rtl{% endif %}
           "
         >
           <button class="menu-desktop__close-btn js-menu-desktop--close">
@@ -362,7 +362,7 @@
                         </span>
                       {% endif %}
 
-                      <div class="menu-desktop-expanded {% if localization.language.iso_code == 'ar' %}menu-desktop-expanded--direction--rtl{% endif %} js-menu-desktop-expanded">
+                      <div class="menu-desktop-expanded {% if localization.language.iso_code == 'ar' %}menu-desktop-expanded--rtl{% endif %} js-menu-desktop-expanded">
                         <ul class="menu-desktop-expanded__list">
                           {%- for grandchild_link in child_link.links -%}
                             <li class="menu-desktop-expanded__item">

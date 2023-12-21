@@ -1,0 +1,43 @@
+{{ 'section-404.css' | asset_url | stylesheet_tag }}
+
+<div class="s-404 {% if localization.language.iso_code == 'ar' %}s-404--rtl{% endif %}">
+  <div class="s-404__wrapper">
+    <h1 class="s-404__title">
+      {{- 'sections.section-404.page_not_found' | t -}}
+    </h1>
+    <p class="s-404__text">
+      {{- 'sections.section-404.page_not_found_sub' | t -}}
+    </p>
+    <a href="{{ routes.root_url }}">
+      <button class="s-404__button">
+        {{- 'sections.section-404.continue_shopping' | t -}}
+      </button>
+    </a>
+
+    <p class="s-404__text">
+      {{- 'sections.section-404.browse_other' | t -}}
+    </p>
+    <ul class="s-404__list">
+      <li class="s-404__list-item">
+        <a class="s-404__list-item--link" href="{{ routes.just_in_url }}">
+          {{- 'sections.section-404.suggestions_list.just_in' | t -}}
+        </a>
+      </li>
+      <li class="s-404__list-item">
+        <a class="s-404__list-item--link" href="{{ routes.collections_url }}">
+          {{- 'sections.section-404.suggestions_list.shop_all' | t -}}
+        </a>
+      </li>
+      <li class="s-404__list-item">
+        <a class="s-404__list-item--link" href="{{ routes.most_popular_url }}">
+          {{- 'sections.section-404.suggestions_list.most_popular' | t -}}
+        </a>
+      </li>
+      <li class="s-404__list-item">
+        <a class="s-404__list-item--link" href="{{ routes.account_url }}">
+          {{- 'sections.section-404.suggestions_list.my_account' | t -}}
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

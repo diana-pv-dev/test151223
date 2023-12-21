@@ -8,13 +8,23 @@
       <div class="s-header__logo-container">
         <a class="s-header__logo-link" href="/">
           {% if section.settings.logo %}
-            {% render 'image',
-              image: section.settings.logo,
-              max_width: 135,
-              max_height: 17,
-              preload: true,
-              ratio_wrap: false
-            %}
+            {% if localization.language.iso_code == 'ar' %}
+              {% render 'image',
+                image: section.settings.logo_ar,
+                max_width: 135,
+                max_height: 17,
+                preload: true,
+                ratio_wrap: false
+              %}
+            {% else %}
+              {% render 'image',
+                image: section.settings.logo,
+                max_width: 135,
+                max_height: 17,
+                preload: true,
+                ratio_wrap: false
+              %}
+            {% endif %}
           {% endif %}
         </a>
       </div>
@@ -479,6 +489,12 @@
       "type": "image_picker",
       "id": "logo",
       "label": "Company logo",
+      "info": "Recommended size: x108"
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_ar",
+      "label": "Company logo (AR)",
       "info": "Recommended size: x108"
     },
     {

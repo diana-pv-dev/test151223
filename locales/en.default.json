@@ -7,6 +7,17 @@
       "external": "Opens external website."
     }
   },
-  "components": {},
-  "sections": {}
+  "components": {
+    "menu-list": {
+      "sign_in_register": "Sign In / Register",
+      "customer_service": "Customer Service",
+      "country_selector": "United Kingdom (£)"
+
+    }
+  },
+  "sections": {
+    "header": {
+      "promo_shop": "SHOP"
+    }
+  }
 }

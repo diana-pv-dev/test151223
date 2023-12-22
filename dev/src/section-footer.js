@@ -7,7 +7,6 @@ class FooterAccordion extends HTMLElement {
 
   connectedCallback() {
     this.openButtons = this.querySelectorAll('.js-footer-menu__button')
-    this.buttonChevron = this.querySelectorAll('.js-footer-menu__icon')
 
     for (const openButton of this.openButtons) {
       openButton.addEventListener('click', (event) => this.toggleMenu(event))

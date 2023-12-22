@@ -1,13 +1,49 @@
 .c-localization {
   &__button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 70%;
+    padding: 8px 0;
+    text-align: left;
+    transition: background-color .1s ease-out;
 
+    &:hover {
+      background-color: #d6d6d6;
+    }
+
+    &:active {
+      background-color: #8d8d8d;
+    }
+
+    &--rtl {
+      text-align: right;
+    }
   }
 
   &__list {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .2s ease-out;
 
+    &--active {
+      max-height: 260px;
+    }
   }
 
   &__item {
-    
+    line-height: 32px;
+  }
+
+  &__link {
+    font-size: 16px;
+    color: #000;
+    opacity: 50%;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+      opacity: 100%;
+    }
   }
 }

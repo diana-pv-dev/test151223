@@ -59,29 +59,42 @@
       <localization-form>
         {% form 'localization' %}
           <div class="s-header__localization c-localization">
-            <button type="button" class="c-localization__button" aria-expanded="false" aria-controls="LanguageList">
-              {{ localization.language.name | capitalize }}
+            <button
+              type="button"
+              class="c-localization__button {% if localization.language.iso_code == 'ar' %}c-localization__button--rtl{% endif %} js-localization__button"
+              aria-expanded="false"
+              aria-controls="LanguageList"
+            >
+              {{ localization.language.endonym_name | capitalize }}
             </button>
 
-            <ul id="LanguageList" role="list" class="c-localization__list">
+            <ul id="LanguageList" role="list" class="c-localization__list js-localization__list">
               {% for language in localization.available_languages %}
-                <li class="c-localization__item" tabindex="-1">
-                  <a
-                    href="#"
-                    {% if language.iso_code == localization.language.iso_code %}
-                      aria-current="true"
-                    {% endif %}
-                    hreflang="{{ language.iso_code }}"
-                    lang="{{ language.iso_code }}"
-                    data-value="{{ language.iso_code }}"
-                  >
-                    {{ language.name | capitalize }}
-                  </a>
-                </li>
+                {% if language.iso_code != localization.language.iso_code %}
+                  <li class="c-localization__item" tabindex="-1">
+                    <a
+                      href="#"
+                      {% if language.iso_code == localization.language.iso_code %}
+                        aria-current="true"
+                      {% endif %}
+                      hreflang="{{ language.iso_code }}"
+                      lang="{{ language.iso_code }}"
+                      data-value="{{ language.iso_code }}"
+                      class="c-localization__link js-localization__link"
+                    >
+                      {{ language.endonym_name | capitalize }}
+                    </a>
+                  </li>
+                {% endif %}
               {% endfor %}
             </ul>
 
-            <input type="hidden" name="language_code" value="{{ localization.language.iso_code }}">
+            <input
+              class="js-localization__input"
+              type="hidden"
+              name="language_code"
+              value="{{ localization.language.iso_code }}"
+            >
           </div>
         {% endform %}
       </localization-form>

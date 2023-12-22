@@ -1,49 +1,44 @@
 class LocalizationForm extends HTMLElement {
   constructor() {
     super();
-    this.elements = {
-      input: this.querySelector('input[name="language_code"], input[name="country_code"]'),
-      button: this.querySelector('button'),
-      panel: this.querySelector('ul'),
-    };
-    this.elements.button.addEventListener('click', this.openSelector.bind(this));
-    this.elements.button.addEventListener('focusout', this.closeSelector.bind(this));
-    this.addEventListener('keyup', this.onContainerKeyUp.bind(this));
-
-    this.querySelectorAll('a').forEach(item => item.addEventListener('click', this.onItemClick.bind(this)));
   }
 
-  hidePanel() {
-    this.elements.button.setAttribute('aria-expanded', 'false');
-    this.elements.panel.setAttribute('hidden', true);
+  connectedCallback() {
+    this.openButton = this.querySelector('.js-localization__button')
+    this.input = this.querySelector('.js-localization__input')
+    this.languageLinks = this.querySelectorAll('.js-localization__link')
+    
+
+    this.openButton.addEventListener('click', () => this.toggleMenu())
+    this.openButton.addEventListener('focusout', () => this.closeMenu());
+    for (const language of this.languageLinks) {
+      language.addEventListener('click', this.onItemClick.bind(this))
+    }
   }
 
-  onContainerKeyUp(event) {
-    if (event.code.toUpperCase() !== 'ESCAPE') return;
+  disconnectedCallback() {
+    this.openButton.removeEventListener('click', () => this.toggleMenu())
+    this.openButton.removeEventListener('focusout', () => this.closeMenu());
+    for (const language of this.languageLinks) {
+      language.removeEventListener('click', this.onItemClick.bind(this))
+    }
+  }
 
-    this.hidePanel();
-    this.elements.button.focus();
+  toggleMenu() {
+    this.openButton.nextElementSibling.classList.toggle('c-localization__list--active');
+  }
+
+  closeMenu() {
+    this.openButton.nextElementSibling.classList.remove('c-localization__list--active');
   }
 
   onItemClick(event) {
     event.preventDefault();
     const form = this.querySelector('form');
-    this.elements.input.value = event.currentTarget.dataset.value;
+    this.input.value = event.currentTarget.dataset.value;
     if (form) form.submit();
   }
 
-  openSelector() {
-    this.elements.button.focus();
-    this.elements.panel.toggleAttribute('hidden');
-    this.elements.button.setAttribute('aria-expanded', (this.elements.button.getAttribute('aria-expanded') === 'false').toString());
-  }
-
-  closeSelector(event) {
-    const shouldClose = event.relatedTarget && event.relatedTarget.nodeName === 'BUTTON';
-    if (event.relatedTarget === null || shouldClose) {
-      this.hidePanel();
-    }
-  }
 }
 
 customElements.define('localization-form', LocalizationForm);

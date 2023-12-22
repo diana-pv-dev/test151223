@@ -18,43 +18,6 @@
   </li>
 
   <li class="s-header__menu-item">
-    {% comment %}
-      {% if localization.available_languages.size > 1 %}
-        <localization-form>
-          {% form 'localization' %}
-            <select name="" id="">
-              {% for language in localization.available_languages %}
-                <option
-                  value="{{ language.iso_code }}"
-                  {%- if language.iso_code == localization.country.iso_code %}
-                    selected
-                  {% endif %}
-                >
-                  {{ language.name }}
-                </option>
-              {%- endfor -%}
-            </select>
-
-            <select name="" id="">
-              {%- for country in localization.available_countries -%}
-                <option
-                  value="{{ country.iso_code }}"
-                  {%- if country.iso_code == localization.country.iso_code %}
-                    selected
-                  {% endif %}
-                >
-                  {{ country.currency.iso_code }}
-                  {{ country.currency.symbol }}
-                </option>
-              {%- endfor -%}
-            </select>
-
-            <input type="hidden" name="language_code" value="{{ localization.language.iso_code }}">
-          {% endform %}
-        </localization-form>
-      {% endif %}
-    {% endcomment %}
-
     {% if localization.available_languages.size > 1 %}
       <localization-form>
         {% form 'localization' %}

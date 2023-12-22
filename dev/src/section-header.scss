@@ -107,6 +107,30 @@
     }
   }
 
+  &__localization {
+    display: none;
+
+    @media screen and (min-width: 768px) {
+      display: flex;
+      
+      &-wrapper {
+        display: flex;
+        gap: 15px;
+      }
+
+      &-select {
+        outline: none;
+        border: none;
+        transition: border-bottom 0.2 ease-in-out;
+  
+        &:hover {
+          border-bottom: 1px solid black;
+        }
+      }
+    }
+    
+  }
+
   &__menu {
     min-width: 320px;
     position: fixed;

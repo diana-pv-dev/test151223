@@ -18,11 +18,73 @@
   </li>
 
   <li class="s-header__menu-item">
-    <a
-      class="s-header__menu-link s-header__menu-link--currency"
-      href="#"
-    >
-      {{- 'components.menu-list.country_selector' | t -}}
-    </a>
+    {% comment %}
+      {% if localization.available_languages.size > 1 %}
+        <localization-form>
+          {% form 'localization' %}
+            <select name="" id="">
+              {% for language in localization.available_languages %}
+                <option
+                  value="{{ language.iso_code }}"
+                  {%- if language.iso_code == localization.country.iso_code %}
+                    selected
+                  {% endif %}
+                >
+                  {{ language.name }}
+                </option>
+              {%- endfor -%}
+            </select>
+
+            <select name="" id="">
+              {%- for country in localization.available_countries -%}
+                <option
+                  value="{{ country.iso_code }}"
+                  {%- if country.iso_code == localization.country.iso_code %}
+                    selected
+                  {% endif %}
+                >
+                  {{ country.currency.iso_code }}
+                  {{ country.currency.symbol }}
+                </option>
+              {%- endfor -%}
+            </select>
+
+            <input type="hidden" name="language_code" value="{{ localization.language.iso_code }}">
+          {% endform %}
+        </localization-form>
+      {% endif %}
+    {% endcomment %}
+
+    {% if localization.available_languages.size > 1 %}
+      <localization-form>
+        {% form 'localization' %}
+          <div class="s-header__localization c-localization">
+            <button type="button" class="c-localization__button" aria-expanded="false" aria-controls="LanguageList">
+              {{ localization.language.name | capitalize }}
+            </button>
+
+            <ul id="LanguageList" role="list" class="c-localization__list">
+              {% for language in localization.available_languages %}
+                <li class="c-localization__item" tabindex="-1">
+                  <a
+                    href="#"
+                    {% if language.iso_code == localization.language.iso_code %}
+                      aria-current="true"
+                    {% endif %}
+                    hreflang="{{ language.iso_code }}"
+                    lang="{{ language.iso_code }}"
+                    data-value="{{ language.iso_code }}"
+                  >
+                    {{ language.name | capitalize }}
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+
+            <input type="hidden" name="language_code" value="{{ localization.language.iso_code }}">
+          </div>
+        {% endform %}
+      </localization-form>
+    {% endif %}
   </li>
 </ul>

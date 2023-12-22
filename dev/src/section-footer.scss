@@ -128,8 +128,44 @@
   }
 
   &__icon {
-    rotate: 90deg;
-    transition: 0.1s;
+    display: block;
+    transform: rotate(90deg);
+    transition: transform  .1s ease;
+    
+    & svg {
+      vertical-align: middle;
+    }
+
+    &--active {
+      transform: rotate(-90deg);
+    }
+  }
+
+  &__accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height .2s ease-out;
+
+    &--active {
+      max-height: 115px;
+    }
+  }
+
+
+  &__item {
+    line-height: 24px;
+  }
+
+  &__link {
+    font-size: 14px;
+    color: #000;
+    opacity: 50%;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+      opacity: 100%;
+    }
   }
 }
 

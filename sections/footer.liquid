@@ -23,29 +23,98 @@
       </div>
 
       <div class="s-footer__information">
-        <div class="s-footer__menu s-footer-menu">
-          <button class="s-footer-menu__button">
-            {{- 'sections.footer.customer_care' | t -}}
-            <span class="s-footer-menu__icon">
-              {% render 'icon-chevron' %}
-            </span>
-          </button>
+        <div class="s-footer__menu footer-menu">
+          {% for link in section.settings.footer_menu.links -%}
+            <button class="footer-menu__button">
+              {{ link.title }}
+              <span class="footer-menu__icon">
+                {% render 'icon-chevron' %}
+              </span>
+            </button>
 
-          {% comment %} таку ж логіку як в хедер меню, показувати якийсь дів з посиланнями, якщо клацнути на кастомер кер ітд {% endcomment %}
+            {%- if link.links != blank -%}
+              <div class="footer-menu__accordion-content">
+                <ul class="footer-menu__list">
+                  {%- for child_link in link.links -%}
+                    <li class="footer-menu__item">
+                      <a class="footer-menu__link" href="#">{{ child_link.title }}</a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {%- endif %}
+          {%- endfor %}
 
-          <button class="s-footer-menu__button">
-            {{- 'sections.footer.terms_of_service' | t -}}
-            <span class="s-footer-menu__icon">
-              {% render 'icon-chevron' %}
-            </span>
-          </button>
+          {% comment %}
+            <button class="footer-menu__button">
+              {{- 'sections.footer.customer_care' | t -}}
+              <span class="footer-menu__icon">
+                {% render 'icon-chevron' %}
+              </span>
+            </button>
 
-          <button class="s-footer-menu__button">
-            {{- 'sections.footer.about_wandler' | t -}}
-            <span class="s-footer-menu__icon">
-              {% render 'icon-chevron' %}
-            </span>
-          </button>
+            <div class="footer-menu__accordion-content">
+              <ul class="footer-menu__list">
+                <li class="footer-menu__item">
+                  <a class="footer-menu__link" href="#">Where to buy</a>
+                </li>
+                <li class="footer-menu__item">
+                  <a class="footer-menu__link" href="#">Returns</a>
+                </li>
+                <li class="footer-menu__item">
+                  <a class="footer-menu__link" href="#">Contact</a>
+                </li>
+                <li class="footer-menu__item">
+                  <a class="footer-menu__link" href="#">Product care</a>
+                </li>
+              </ul>
+            </div>
+
+            <button class="footer-menu__button">
+              {{- 'sections.footer.terms_of_service' | t -}}
+              <span class="footer-menu__icon">
+                {% render 'icon-chevron' %}
+              </span>
+            </button>
+
+            <div class="footer-menu__accordion-content">
+              <ul class="footer-menu__list">
+                <li class="footer-menu__item">
+                  <a class="footer-menu__link" href="#">Terms & Conditions</a>
+                </li>
+                <li class="footer-menu__item">
+                  <a class="footer-menu__link" href="#">Privacy Policy</a>
+                </li>
+                <li class="footer-menu__item">
+                  <a class="footer-menu__link" href="#">Payment Policy</a>
+                </li>
+              </ul>
+            </div>
+
+            <button class="footer-menu__button">
+              {{- 'sections.footer.about_wandler' | t -}}
+              <span class="footer-menu__icon">
+                {% render 'icon-chevron' %}
+              </span>
+            </button>
+
+            <div class="footer-menu__accordion-content">
+              <ul class="footer-menu__list">
+                <li class="footer-menu__item">
+                  <a class="footer-menu__link" href="#">About</a>
+                </li>
+                <li class="footer-menu__item">
+                  <a class="footer-menu__link" href="#">Green Ambition</a>
+                </li>
+                <li class="footer-menu__item">
+                  <a class="footer-menu__link" href="#">Made In Italy</a>
+                </li>
+                <li class="footer-menu__item">
+                  <a class="footer-menu__link" href="#">Vacancies</a>
+                </li>
+              </ul>
+            </div>
+          {% endcomment %}
         </div>
 
         <div class="s-footer__shipment">
@@ -82,6 +151,11 @@
     {
       "type": "header",
       "content": "Section settings"
+    },
+    {
+      "type": "link_list",
+      "id": "footer_menu",
+      "label": "Footer Menu"
     }
   ]
 }

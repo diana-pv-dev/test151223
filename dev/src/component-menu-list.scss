@@ -27,7 +27,8 @@
     transition: max-height .2s ease-out;
 
     &--active {
-      max-height: 260px;
+      max-height: 300px;
+      overflow: auto;
     }
   }
 

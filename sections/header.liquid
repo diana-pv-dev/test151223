@@ -50,68 +50,92 @@
         </nav>
 
         <div class="s-header__icons">
-          <div class="s-header__localization">
-            {% if localization.available_languages.size > 1 %}
-              <localization-select>
-                {% form 'localization' %}
-                  <div class="s-header__localization-wrapper">
-                    <select
-                      name="language_code"
-                      id="languageSelect"
-                      class="s-header__localization-select js-localization__select"
-                    >
-                      <option
-                        value="{{ localization.language.iso_code }}"
-                        selected
-                      >
-                        {{ localization.language.endonym_name | capitalize }}
-                      </option>
-                      {% for language in localization.available_languages %}
-                        {% if language.iso_code != localization.language.iso_code %}
-                          <option
-                            value="{{ language.iso_code }}"
-                            lang="{{ language.iso_code }}"
-                            data-value="{{ language.iso_code }}"
-                            {%- if language.iso_code == localization.country.iso_code %}
-                              selected
-                            {% endif %}
-                          >
-                            {{ language.endonym_name | capitalize }}
-                          </option>
-                        {% endif %}
-                      {%- endfor -%}
-                    </select>
+          {% liquid
+            assign isLanguage = section.settings.show_language_selector
+            assign isCurrency = section.settings.show_currency_selector
+          %}
 
-                    <select
-                      name="currency_code"
-                      id="currencySelect"
-                      class="s-header__localization-select js-currency__select"
-                    >
-                      {%- for country in localization.available_countries -%}
-                        <option
-                          value="{{ country.iso_code }}"
-                          {%- if country.iso_code == localization.country.iso_code %}
-                            selected
-                          {% endif %}
+          {% if isLanguage or isCurrency %}
+            <div class="s-header__localization">
+              {% if localization.available_languages.size > 1 %}
+                <localization-select-form>
+                  {% form 'localization' %}
+                    <div class="s-header__localization-wrapper">
+                      {% if section.settings.show_language_selector %}
+                        <select
+                          name="language_code"
+                          id="languageSelect"
+                          class="s-header__localization-select js-localization__select"
                         >
-                          {{ country.currency.iso_code }}
-                          {{ country.currency.symbol }}
-                        </option>
-                      {%- endfor -%}
-                    </select>
+                          <option
+                            value="{{ localization.language.iso_code }}"
+                            selected
+                          >
+                            {{ localization.language.endonym_name | capitalize }}
+                          </option>
 
-                    <input
-                      class="js-localization__input"
-                      type="hidden"
-                      name="language_code"
-                      value="{{ localization.language.iso_code }}"
-                    >
-                  </div>
-                {% endform %}
-              </localization-select>
-            {% endif %}
-          </div>
+                          {% for language in localization.available_languages %}
+                            {% if language.iso_code != localization.language.iso_code %}
+                              <option
+                                value="{{ language.iso_code }}"
+                                lang="{{ language.iso_code }}"
+                                data-value="{{ language.iso_code }}"
+                                {%- if language.iso_code == localization.country.iso_code %}
+                                  selected
+                                {% endif %}
+                              >
+                                {{ language.endonym_name | capitalize }}
+                              </option>
+                            {% endif %}
+                          {%- endfor -%}
+                        </select>
+                      {% endif %}
 
+                      {% if section.settings.show_currency_selector %}
+                        <select
+                          name="currency_code"
+                          id="currencySelect"
+                          class="s-header__localization-select js-currency__select"
+                        >
+                          <option
+                            value="{{ localization.country.currency.iso_code }}"
+                            selected
+                          >
+                            {{ localization.country.currency.iso_code }}
+                            {{ localization.country.currency.symbol }}
+                          </option>
+
+                          {%- for country in localization.available_countries -%}
+                            {% if country.currency.iso_code != localization.country.currency.iso_code %}
+                              <option
+                                value="{{ country.currency.iso_code }}"
+                              >
+                                {{ country.currency.iso_code }}
+                                ({{ country.currency.symbol }})
+                              </option>
+                            {% endif %}
+                          {%- endfor -%}
+                        </select>
+                      {% endif %}
+
+                      <input
+                        class="js-localization__input--lang"
+                        type="hidden"
+                        name="language_code"
+                        value="{{ localization.language.iso_code }}"
+                      >
+                      <input
+                        class="js-localization__input--currency"
+                        type="hidden"
+                        name="currency_code"
+                        value="{{ localization.country.currency.iso_code }}"
+                      >
+                    </div>
+                  {% endform %}
+                </localization-select-form>
+              {% endif %}
+            </div>
+          {% endif %}
           <button class="s-header__icons-btn">
             <div class="s-header__icon">
               {% render 'icon-search' %}
@@ -565,6 +589,18 @@
       "type": "link_list",
       "id": "menu",
       "label": "Menu"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_currency_selector",
+      "default": true,
+      "label": "Currency Selector"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_language_selector",
+      "default": true,
+      "label": "Language Selector"
     }
   ],
   "blocks": [

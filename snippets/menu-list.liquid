@@ -17,11 +17,11 @@
     </a>
   </li>
 
-  <li class="s-header__menu-item">
-    {% if localization.available_languages.size > 1 %}
+  {% if localization.available_languages.size > 1 %}
+    <li class="s-header__menu-item">
       <localization-form>
         {% form 'localization' %}
-          <div class="s-header__localization c-localization">
+          <div class="s-header__menu-localization c-localization">
             <button
               type="button"
               class="c-localization__button {% if localization.language.iso_code == 'ar' %}c-localization__button--rtl{% endif %} js-localization__button"
@@ -61,6 +61,6 @@
           </div>
         {% endform %}
       </localization-form>
-    {% endif %}
-  </li>
+    </li>
+  {% endif %}
 </ul>

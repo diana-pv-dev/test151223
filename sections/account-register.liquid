@@ -1,0 +1,209 @@
+{{ 'section-account-register.css' | asset_url | stylesheet_tag }}
+
+{% style %}
+  #shopify-section-{{ section.id }} .s-account-register {
+    padding-top: {{section.settings.padding_top_mobile}}px;
+    padding-bottom: {{section.settings.padding_bottom_mobile}}px;
+  }
+
+  @media screen and (min-width: 900px) {
+    #shopify-section-{{ section.id }} .s-account-register {
+      padding-top: {{section.settings.padding_top_desktop}}px;
+      padding-bottom: {{section.settings.padding_bottom_desktop}}px;
+    }
+  }
+{% endstyle %}
+
+<script src="{{ "section-account-register.js" | asset_url }}" defer></script>
+
+<div class="s-account-register">
+  <s-account-register>
+    <div class="s-account-register__inner">
+      <h2 class="s-account-register__title">Create an Account</h2>
+      <div class="s-account-register__subtitle">
+        <p>Already have a Customer Account?</p>
+        <div>
+          <span>Then</span>
+          <a href="/account/login">Sign In here</a>
+        </div>
+      </div>
+
+      <div class="s-account-register__form-wrapper">
+        {%- form 'create_customer', return_to: routes.account_url, class: 's-account-register__form' -%}
+          <h4 class="'s-account-register__form-title">Create your Account</h4>
+
+          <div class="s-account-register__form-field">
+            <input
+              type="text"
+              name="customer[first_name]"
+              class="js-account-register__first-name"
+              {% if form.first_name %}
+                value="{{ form.first_name }}"
+              {% endif %}
+              autocomplete="given-name"
+              placeholder="First Name*"
+            >
+            <p class="s-account-register__form-field--error">*This field can't be empty</p>
+          </div>
+
+          <div class="s-account-register__form-field">
+            <input
+              type="text"
+              name="customer[last_name]"
+              class="js-account-register__last-name"
+              {% if form.last_name %}
+                value="{{ form.last_name }}"
+              {% endif %}
+              autocomplete="family-name"
+              placeholder="Last Name*"
+            >
+            <p class="s-account-register__form-field--error">*This field can't be empty</p>
+          </div>
+
+          <div class="s-account-register__form-field">
+            <input
+              type="email"
+              name="customer[email]"
+              class="js-account-register__email"
+              {% if form.email %}
+                value="{{ form.email }}"
+              {% endif %}
+              spellcheck="false"
+              autocapitalize="off"
+              autocomplete="email"
+              aria-required="true"
+              {% if form.errors contains 'email' %}
+                aria-invalid="true"
+                aria-describedby="RegisterForm-email-error"
+              {% endif %}
+              placeholder="Email Address*"
+            >
+            <p class="s-account-register__form-field--error {% if form.errors contains 'email' %}s-account-register__form-field--error-active{% endif %}">
+              Please enter a valid email
+            </p>
+          </div>
+
+          <div class="s-account-register__form-field">
+            <input
+              type="password"
+              name="customer[password]"
+              class="js-account-register__password"
+              aria-required="true"
+              {% if form.errors contains 'password' %}
+                aria-invalid="true"
+                aria-describedby="RegisterForm-password-error"
+              {% endif %}
+              placeholder="Password*"
+            >
+            <p class="s-account-register__form-field--error {% if form.errors contains 'password' %}s-account-register__form-field--error--active{% endif %}">
+              *Must be at least 8 characters long.
+            </p>
+
+            <button
+              type="button"
+              data-input=".js-account-register__password"
+              class="s-account-register__show-password js-account-register__toggle-password"
+            >
+              {% render 'icon-open-eye' %}
+              {% render 'icon-close' %}
+            </button>
+          </div>
+
+          <div class="s-account-register__form-field">
+            <input
+              type="password"
+              name="customer[password-check]"
+              class="js-account-register__password-check"
+              aria-required="true"
+              {% if form.errors contains 'password' %}
+                aria-invalid="true"
+                aria-describedby="RegisterForm-password-error"
+              {% endif %}
+              placeholder="Confirm Password*"
+            >
+            <p class="s-account-register__form-field--error">*Two passwords are not identical</p>
+
+            <button
+              type="button"
+              data-input=".js-account-register__password-check"
+              class="s-account-register__show-password js-account-register__toggle-password"
+            >
+              {% render 'icon-open-eye' %}
+              {% render 'icon-close' %}
+            </button>
+          </div>
+
+          <div class="s-account-register__form-info">
+            <div class="s-account-register__form-info--privacy">
+              <span>Read the</span>
+              <a href="/pages/policy">Privacy Policy</a>
+              <span>for further information</span>
+            </div>
+
+            <div class="s-account-register__form-info--marketing">
+              <input type="checkbox" name="marketing">
+              <label for="marketing">I would like to receive marketing information.</label>
+            </div>
+
+            <button class="s-account-register__form-submit js-account-register__submit-button" type="button">
+              Create Account
+            </button>
+          </div>
+        {%- endform -%}
+      </div>
+    </div>
+  </s-account-register>
+</div>
+
+{% schema %}
+{
+  "name": "Account Register",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_desktop",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Section padding top (Desktop)",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_desktop",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Section padding bottom (Desktop)",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Section padding top (mobile)",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "Section padding bottom (mobile)",
+      "default": 30
+    }
+  ]
+}
+{% endschema %}
